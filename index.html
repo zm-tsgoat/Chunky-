@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chunky Chick-Inn Wigan | Menu Demo</title>
+<style>
+:root{--bg:#0d0d0c;--card:#181816;--gold:#ffc928;--cream:#fff9ed;--muted:#aaa69a;--line:#323129}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--cream);font-family:Arial,Helvetica,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.top{background:var(--gold);color:#17140c;text-align:center;padding:9px;font-size:10px;font-weight:900;letter-spacing:1.8px}
+header{height:74px;padding:0 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#10100ff2;backdrop-filter:blur(16px);z-index:10;border-bottom:1px solid var(--line)}
+.logo{font-weight:1000;font-size:21px;letter-spacing:-.8px}
+.logo span{color:var(--gold)}
+.logo small{display:block;font-size:9px;letter-spacing:3px;color:var(--muted);margin-top:5px}
+nav{display:flex;align-items:center;gap:20px;font-size:13px}
+nav a{color:#ddd6c8;text-decoration:none}
+button.gold{background:var(--gold);color:#16130b;border:0;border-radius:8px;padding:12px 16px;font-weight:900}
+button.dark{background:#24231d;color:white;border:1px solid #444137;border-radius:8px;padding:11px 14px}
+main{max-width:1240px;margin:auto;padding:0 5%}
+.hero{margin-top:25px;min-height:420px;border-radius:17px;overflow:hidden;display:flex;align-items:center;background:linear-gradient(90deg,#0b0b09 0%,#0b0b09eF 34%,#0b0b0966 100%),url('https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=1500&q=85') center/cover}
+.heroText{padding:clamp(25px,6vw,65px);max-width:620px}
+.kicker{font-size:10px;letter-spacing:3px;color:var(--gold);font-weight:900}
+h1{font-size:clamp(48px,8vw,86px);line-height:.91;letter-spacing:-4px;margin:20px 0}
+h1 span{color:var(--gold)}
+.hero p{font-size:14px;line-height:1.8;color:#d0c8b9;max-width:420px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);margin:24px 0 55px;border-block:1px solid var(--line)}
+.trust div{text-align:center;padding:21px 8px;border-right:1px solid var(--line);font-size:11px;font-weight:800;letter-spacing:.6px}
+.trust div:last-child{border:0}
+.trust small{display:block;font-size:10px;font-weight:400;letter-spacing:0;color:var(--muted);margin-top:6px}
+.menuHead{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:20px}
+h2{font-size:clamp(28px,4vw,40px);letter-spacing:-1.5px;margin:8px 0}
+.sub{color:var(--muted);font-size:12px;line-height:1.7}
+.searchRow{display:flex;gap:9px;margin:20px 0 15px}
+input,select{background:#191916;border:1px solid #3a392f;color:white;border-radius:9px;padding:14px;outline:none}
+input:focus,select:focus{border-color:var(--gold)}
+#search{width:100%;min-width:0}
+#sort{max-width:165px}
+.categories{display:flex;gap:8px;overflow-x:auto;padding:4px 0 18px;scrollbar-width:none}
+.categories button{white-space:nowrap;border:1px solid #3c3a31;border-radius:25px;background:transparent;color:#ccc5b7;padding:10px 15px;font-size:11px}
+.categories button.active,.categories button:hover{background:var(--gold);border-color:var(--gold);color:#17140c}
+.meta{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:15px;color:var(--muted);font-size:11px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.item{background:var(--card);border:1px solid #302f28;border-radius:13px;overflow:hidden;transition:transform .2s,border-color .2s}
+.item:hover{transform:translateY(-4px);border-color:#a68a35}
+.photo{height:165px;position:relative;background:#24231c center/cover;display:grid;place-items:center}
+.photo:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0005,transparent 60%);pointer-events:none}
+.photo .emoji{font-size:58px;filter:drop-shadow(0 8px 12px #0009);z-index:1}
+.tag{position:absolute;z-index:2;top:11px;left:11px;padding:7px 9px;background:var(--gold);color:#17140c;border-radius:4px;font-size:9px;font-weight:900;letter-spacing:.7px}
+.fav{position:absolute;z-index:2;top:9px;right:9px;background:#0b0b0bbd;color:white;border:1px solid #ffffff44;border-radius:50%;width:34px;height:34px;font-size:18px}
+.body{padding:14px}
+.itemTitle{display:flex;justify-content:space-between;align-items:start;gap:8px}
+.item h3{font-size:14px;margin:0;line-height:1.4}
+.price{color:var(--gold);font-size:14px;font-weight:900;white-space:nowrap}
+.desc{color:var(--muted);font-size:11px;line-height:1.6;min-height:35px;margin:9px 0 13px}
+.add{width:100%;background:#292820;color:white;border:1px solid #454238;border-radius:7px;padding:11px;font-size:11px;font-weight:900}
+.add:hover{background:var(--gold);color:#17140c}
+.empty{grid-column:1/-1;text-align:center;padding:45px 15px;color:var(--muted);line-height:1.8}
+.note{font-size:10px;line-height:1.8;color:#888477;margin:20px 0 50px}
+.promo{margin:0 0 55px;padding:clamp(22px,5vw,40px);border:1px solid #574a2b;border-radius:14px;background:linear-gradient(110deg,#292315,#191914);display:flex;align-items:center;justify-content:space-between;gap:20px}
+.promo h2{font-size:clamp(26px,4vw,38px)}
+footer{border-top:1px solid var(--line);padding:28px 5%;color:#8d887c;font-size:11px;line-height:1.8}
+.foot{max-width:1150px;margin:auto;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.overlay{display:none;position:fixed;inset:0;z-index:30;background:#000c;align-items:center;justify-content:center;padding:15px}
+.overlay.show{display:flex}
+.dialog{width:min(520px,100%);max-height:85vh;overflow:auto;padding:22px;background:#191916;border:1px solid #4b4738;border-radius:14px}
+.dialogHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.dialogHead h2{font-size:25px;margin:0}
+.line{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);font-size:12px}
+.line small{display:block;color:var(--muted);margin-top:5px}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{background:#302e27;border:0;color:white;padding:6px 10px;border-radius:5px}
+.total{display:flex;justify-content:space-between;font-size:17px;font-weight:900;padding:18px 0}
+.full{width:100%}
+.notice{padding:12px;background:#262318;border-radius:8px;color:#d5cdb9;font-size:11px;line-height:1.7;margin:10px 0 16px}
+@media(max-width:760px){
+ header{height:65px;padding:0 4%}nav{gap:9px}nav a{display:none}main{padding:0 4%}
+ .hero{min-height:410px;background-position:58% center}.heroText{padding:25px}h1{letter-spacing:-2.5px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.photo{height:125px}.photo .emoji{font-size:45px}
+ .body{padding:11px}.item h3{font-size:12px}.price{font-size:12px}.desc{font-size:10px;min-height:46px}
+ .menuHead{align-items:start;flex-direction:column}.trust{margin-bottom:45px}.searchRow{flex-direction:column}#sort{max-width:none}
+ .promo{align-items:start;flex-direction:column}
+}
+@media(max-width:370px){.grid{grid-template-columns:1fr}.photo{height:175px}.desc{min-height:0}}
+</style>
+</head>
+<body>
+<div class="top">CHUNKY CHICK-INN WIGAN · INDEPENDENT WEBSITE DEMO</div>
+<header>
+ <a href="#" style="text-decoration:none;color:inherit"><div class="logo">CHUNKY<span> CHICK-INN</span><small>WIGAN LANE · WIGAN</small></div></a>
+ <nav><a href="#menu">Menu</a><a href="#about">About</a><button class="gold" onclick="openCart()">Basket <span id="count">0</span></button></nav>
+</header>
+<main>
+<section class="hero">
+ <div class="heroText">
+  <div class="kicker">YOUR LOCAL TAKEAWAY · WIGAN</div>
+  <h1>BIG CRAVINGS.<br><span>BIG FLAVOUR.</span></h1>
+  <p>Chicken, burgers, wraps, pizza and more. Explore a menu concept designed to make choosing your next takeaway easy.</p>
+  <div class="actions"><a class="gold" href="#menu" style="text-decoration:none;padding:14px 17px;border-radius:8px;font-size:12px;font-weight:900">EXPLORE THE MENU ↗</a><button class="dark" onclick="openCart()">VIEW BASKET</button></div>
+ </div>
+</section>
+<div class="trust">
+ <div>🍗 CHICKEN FAVOURITES<small>Wings, strips and fried chicken</small></div>
+ <div>🍕 MORE THAN CHICKEN<small>Burgers, wraps and pizzas</small></div>
+ <div>🛍️ EASY TO EXPLORE<small>Search and build a demo basket</small></div>
+</div>
+<section id="menu">
+ <div class="menuHead"><div><div class="kicker">FIND YOUR FAVOURITE</div><h2>THE MENU<span style="color:var(--gold)">.</span></h2><div class="sub">Search the menu or choose a category below.</div></div></div>
+ <div class="searchRow"><input id="search" placeholder="⌕  Search burgers, pizzas, wings, desserts..." aria-label="Search all menu items"><select id="sort" aria-label="Sort menu"><option value="featured">Sort: Featured</option><option value="low">Price: Low to high</option><option value="high">Price: High to low</option><option value="az">Name: A to Z</option></select></div>
+ <div class="categories" id="categories"></div>
+ <div class="meta"><span id="resultCount"></span><button class="dark" id="favouriteToggle" onclick="toggleOnlyFav()">♡ Favourites</button></div>
+ <div class="grid" id="grid"></div>
+ <p class="note">DEMO NOTICE: This is a concept website made for presentation. Menu information is based on public online listings and may be incomplete or out of date. Prices are examples from published listings, not guaranteed current prices. Food photos are illustrative and may not depict the exact dish. This site does not send orders or accept payments.</p>
+</section>
+<section class="promo" id="about"><div><div class="kicker">MADE FOR WIGAN</div><h2>A BETTER WAY TO<br>EXPLORE THE MENU.</h2><div class="sub">A website concept for Chunky Chick-Inn, 55 Wigan Lane, Wigan.</div></div><button class="gold" onclick="openCart()">BUILD A BASKET ↗</button></section>
+</main>
+<footer><div class="foot"><div class="logo">CHUNKY<span> CHICK-INN</span><small>WEBSITE CONCEPT DEMO</small></div><div>55 Wigan Lane, Wigan, WN1 2LF<br>Not the official website.</div><div>© 2026 · Demo project</div></div></footer>
+
+<div class="overlay" id="cartOverlay" onclick="if(event.target===this)closeCart()"><div class="dialog">
+ <div class="dialogHead"><h2>Your basket</h2><button class="dark" onclick="closeCart()">✕</button></div>
+ <div class="notice">Demo basket only. No order will be sent to the restaurant, and no payment details are needed.</div>
+ <div id="cartItems"></div><div class="total"><span>Total</span><span id="total">£0.00</span></div>
+ <button class="gold full" onclick="checkout()">PREVIEW CHECKOUT</button>
+</div></div>
+<div class="overlay" id="messageOverlay" onclick="if(event.target===this)this.classList.remove('show')"><div class="dialog">
+ <div class="dialogHead"><h2>Demo checkout</h2><button class="dark" onclick="document.querySelector('#messageOverlay').classList.remove('show')">✕</button></div>
+ <p class="sub">This is only a presentation demo. To take real orders, the restaurant would need to approve the site and connect a real ordering and payment system.</p><button class="gold full" onclick="document.querySelector('#messageOverlay').classList.remove('show')">GOT IT</button>
+</div></div>
+
+<script>
+const photos={
+"Burgers":"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
+"Chicken":"https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80",
+"Wings":"https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=800&q=80",
+"Wraps":"https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80",
+"Pizza":"https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+"Sides":"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=80",
+"Desserts":"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+"Drinks":"https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80",
+"Meals":"https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=800&q=80"
+};
+const raw=[
+["Fillet Burger","Burgers",4.99,"Chicken fillet burger.","🍔"],
+["Fillet Sizzler Burger","Burgers",4.99,"Spicy fillet burger.","🍔"],
+["Supreme Fillet Burger","Burgers",5.99,"Supreme-style chicken burger.","🍔"],
+["Supreme Sizzler Burger","Burgers",5.99,"Spicy supreme burger.","🍔"],
+["Chicken Steak Burger","Burgers",3.99,"Chicken steak burger.","🍔"],
+["Chicken Strip Burger","Burgers",4.99,"Crispy chicken strip burger.","🍔"],
+["Chicken Sandwich Burger","Burgers",3.49,"Chicken sandwich burger.","🍔"],
+["Fish Burger With Cheese","Burgers",4.49,"Fish burger with cheese.","🍔"],
+["Veggie Burger With Cheese","Burgers",4.49,"Vegetarian burger with cheese.","🍔"],
+["Quarter Pounder Beef Burger","Burgers",4.25,"Quarter pounder beef burger.","🍔"],
+["Half Pounder Beef Burger","Burgers",5.25,"Half pounder beef burger.","🍔"],
+["Quarter Pounder Cheese Burger","Burgers",4.49,"Beef burger with cheese.","🍔"],
+["Half Pounder Cheese Burger","Burgers",5.49,"Larger beef burger with cheese.","🍔"],
+["Tower Cheese Burger","Burgers",6.49,"Triple cheeseburger-style option.","🍔"],
+["Donner Burger","Burgers",4.49,"Donner-style burger.","🍔"],
+["Double Fillet Burger","Burgers",6.49,"Double chicken fillet burger.","🍔"],
+["Double Sizzler Burger","Burgers",6.49,"Double spicy fillet burger.","🍔"],
+["Chicken XL Burger","Burgers",4.99,"Peri-peri chicken XL burger.","🍔"],
+["Double Chicken XL Burger","Burgers",6.49,"Double peri-peri chicken XL burger.","🍔"],
+["Big Daddy Burger","Burgers",6.49,"Quarter pounder cheese with peri-peri chicken fillet.","🍔"],
+["Chicken Strip Wrap","Wraps",4.99,"Chicken strips in a wrap.","🌯"],
+["Veggie Wrap","Wraps",4.49,"Vegetarian wrap.","🌯"],
+["Sheesh Kebab Wrap","Wraps",4.99,"Kebab-style wrap.","🌯"],
+["Donner Wrap","Wraps",4.99,"Donner meat in a wrap.","🌯"],
+["Halloumi Wrap","Wraps",4.99,"Halloumi wrap.","🌯"],
+["Chicken Shawarma Wrap","Wraps",5.49,"Chicken shawarma wrap.","🌯"],
+["Double Chicken Wrap","Wraps",6.49,"Double chicken wrap.","🌯"],
+["Double Sizzler Wrap","Wraps",6.49,"Double spicy chicken wrap.","🌯"],
+["Peri Peri Tender Wrap","Wraps",5.49,"Peri-peri tender wrap.","🌯"],
+["Peri Peri Tenders In Pitta","Wraps",6.99,"Peri-peri tenders in pitta bread.","🌯"],
+["1 Piece Chicken","Chicken",1.80,"Single piece of fried chicken.","🍗"],
+["2 Pieces Chicken","Chicken",3.30,"Two pieces of fried chicken.","🍗"],
+["3 Pieces Chicken","Chicken",4.50,"Three pieces of fried chicken.","🍗"],
+["4 Pieces Chicken","Chicken",6.00,"Four pieces of fried chicken.","🍗"],
+["8 Pieces Chicken","Chicken",12.00,"Eight pieces of fried chicken.","🍗"],
+["6 Chicken Strips","Chicken",4.49,"Six chicken strips.","🍗"],
+["8 Chicken Strips","Chicken",5.99,"Eight chicken strips.","🍗"],
+["12 Chicken Strips","Chicken",7.99,"Twelve chicken strips.","🍗"],
+["5 Spicy Crunchy Strips","Chicken",4.99,"Crunchy spicy chicken strips.","🍗"],
+["5 Fire & Honey Crunch Strips","Chicken",6.49,"Crunchy strips with sweet honey chilli-style topping.","🍗"],
+["4 BBQ Wings","Wings",4.99,"BBQ-style chicken wings.","🍗"],
+["6 Spicy Wings","Wings",3.99,"Six spicy wings.","🍗"],
+["12 Spicy Wings","Wings",7.49,"Twelve spicy wings.","🍗"],
+["18 Spicy Wings","Wings",10.49,"Eighteen spicy wings.","🍗"],
+["5 Peri Peri Wings","Wings",5.49,"Peri-peri chicken wings.","🍗"],
+["10 Peri Peri Wings","Wings",9.99,"Ten peri-peri wings.","🍗"],
+["15 Peri Peri Wings","Wings",13.99,"Fifteen peri-peri wings.","🍗"],
+["5 Peri Peri Tender Strips","Chicken",6.49,"Peri-peri tender strips.","🍗"],
+["12 Peri Peri Tender Strips","Chicken",11.99,"Twelve peri-peri tender strips.","🍗"],
+["Quarter Peri Peri Chicken","Chicken",5.99,"Quarter peri-peri chicken.","🍗"],
+["Half Peri Peri Chicken","Chicken",7.99,"Half peri-peri chicken.","🍗"],
+["Whole Peri Peri Chicken","Chicken",10.99,"Whole peri-peri chicken.","🍗"],
+["Chicken & Rice","Meals",8.49,"Peri-peri chicken chunks with caramelised onion rice.","🍗"],
+["Chunkys Mix","Meals",6.99,"Chicken, wings or nuggets, fries and a drink.","🍗"],
+["2 Piece Combo Meal","Meals",6.49,"Chicken, fries, drink and a side option.","🍗"],
+["3 Piece Combo Meal","Meals",7.49,"Chicken, fries, drink and a side option.","🍗"],
+["Boneless Meal","Meals",7.99,"Chicken strips, popcorn chicken, fries and a drink.","🍗"],
+["6 Nuggets Meal","Meals",5.99,"Six nuggets, fries and a drink.","🍗"],
+["4 Chicken Strips Meal","Meals",7.49,"Four chicken strips, fries and a drink.","🍗"],
+["Chunkys Loaded Box","Meals",8.49,"Fillet or sizzler burger, chicken, side, fries and drink.","🍗"],
+["Peri Peri Chicken XL Meal","Meals",7.99,"Peri-peri chicken XL burger meal.","🍗"],
+["Peri Peri Tender Wrap Meal","Meals",7.99,"Peri-peri tender wrap with meal sides.","🌯"],
+["Kids 7 Inch Pizza Meal","Meals",4.99,"Kids pizza meal concept; check current options and price.","🍕"],
+["Mini Family Meal","Meals",19.99,"Pizza, two fillet burgers, wings, fries and a bottle.","🍗"],
+["Home Alone Meal","Meals",8.99,"Pizza, chicken, fries and a drink.","🍕"],
+["Medium Meal Deal","Meals",9.99,"Pizza, cheesy garlic bread, fries and drinks.","🍕"],
+["Value Meal Deal","Meals",17.99,"Two pizzas, chicken, fries and drinks.","🍕"],
+["Mega Meal Deal","Meals",24.99,"Large pizza, chicken, wings, fries and a bottle.","🍕"],
+["Family Meal Deal","Meals",17.99,"Pizza, fries, wings, side and a bottle.","🍕"],
+["Wraps Deal","Meals",23.99,"Four wraps, fries and a bottle.","🌯"],
+["Chunkys Feast","Meals",27.00,"Three 12-inch pizzas.","🍕"],
+["9 Inch Margherita","Pizza",7.99,"Classic tomato and cheese pizza.","🍕"],
+["9 Inch Pepperoni Lover","Pizza",7.99,"Pepperoni pizza.","🍕"],
+["9 Inch Mexicano","Pizza",7.99,"Mexicano-style pizza.","🍕"],
+["9 Inch Chicken Tikka","Pizza",7.99,"Chicken tikka pizza.","🍕"],
+["9 Inch Meat Feast","Pizza",7.99,"Meat feast pizza.","🍕"],
+["9 Inch Chunkys Special","Pizza",7.99,"House special pizza.","🍕"],
+["9 Inch BBQ Chicken","Pizza",7.99,"BBQ chicken pizza.","🍕"],
+["9 Inch Big Meaty","Pizza",7.99,"Meaty pizza.","🍕"],
+["9 Inch Vesuvius","Pizza",7.99,"Spicy Vesuvius pizza.","🍕"],
+["9 Inch Donner Meat","Pizza",7.99,"Donner meat pizza.","🍕"],
+["12 Inch Margherita","Pizza",9.99,"Classic tomato and cheese pizza.","🍕"],
+["12 Inch Pepperoni Lover","Pizza",9.99,"Pepperoni pizza.","🍕"],
+["12 Inch Mexicano","Pizza",9.99,"Mexicano-style pizza.","🍕"],
+["12 Inch Chicken Tikka","Pizza",9.99,"Chicken tikka pizza.","🍕"],
+["12 Inch Meat Feast","Pizza",9.99,"Meat feast pizza.","🍕"],
+["12 Inch Chunkys Special","Pizza",9.99,"House special pizza.","🍕"],
+["12 Inch BBQ Chicken","Pizza",9.99,"BBQ chicken pizza.","🍕"],
+["12 Inch Hawaiian","Pizza",8.99,"Hawaiian-style pizza.","🍕"],
+["14 Inch Pepperoni Lover","Pizza",11.49,"Large pepperoni pizza.","🍕"],
+["14 Inch Meat Feast","Pizza",11.49,"Large meat feast pizza.","🍕"],
+["16 Inch Pepperoni Lover","Pizza",14.49,"Extra-large pepperoni pizza.","🍕"],
+["9 Inch Garlic Bread","Sides",5.99,"Garlic bread.","🥖"],
+["9 Inch Garlic Bread With Cheese","Sides",6.49,"Garlic bread with cheese.","🥖"],
+["12 Inch Garlic Bread With Cheese","Sides",8.49,"Larger garlic bread with cheese.","🥖"],
+["Regular Fries","Sides",1.99,"Classic fries.","🍟"],
+["Large Fries","Sides",2.49,"Large fries.","🍟"],
+["Regular Cheesy Fries","Sides",2.99,"Fries with cheese.","🍟"],
+["Large Cheesy Fries","Sides",3.49,"Large cheesy fries.","🍟"],
+["Curly Fries","Sides",2.99,"Curly fries.","🍟"],
+["Twister Fries","Sides",2.99,"Twister fries.","🍟"],
+["Potato Wedges","Sides",2.99,"Seasoned potato wedges.","🥔"],
+["Onion Rings 6 Pieces","Sides",2.99,"Six onion rings.","🧅"],
+["Onion Rings 12 Pieces","Sides",4.99,"Twelve onion rings.","🧅"],
+["10 Popcorn Chicken","Sides",3.99,"Popcorn chicken pieces.","🍗"],
+["15 Popcorn Chicken","Sides",4.99,"Larger popcorn chicken portion.","🍗"],
+["20 Popcorn Chicken","Sides",6.99,"Sharing popcorn chicken portion.","🍗"],
+["4 Mozzarella Sticks","Sides",3.99,"Mozzarella sticks with hot cheese sauce.","🧀"],
+["Chilli Cheese Nuggets","Sides",3.49,"Four chilli cheese nuggets.","🧀"],
+["Halloumi Fries","Sides",3.49,"Five halloumi fries.","🧀"],
+["Grilled Corn On The Cob","Sides",1.49,"Corn on the cob.","🌽"],
+["Coleslaw","Sides",2.00,"Coleslaw side.","🥗"],
+["Regular Chicken Gravy","Sides",1.29,"Regular gravy pot.","🥣"],
+["Large Chicken Gravy","Sides",1.79,"Large gravy pot.","🥣"],
+["Vanilla Milk Cake","Desserts",5.49,"Vanilla milk cake.","🍰"],
+["Biscoff Milk Cake","Desserts",6.49,"Biscoff milk cake.","🍰"],
+["Oreo Milk Cake","Desserts",6.49,"Oreo milk cake.","🍰"],
+["Ferrero Milk Cake","Desserts",6.49,"Ferrero-style milk cake.","🍰"],
+["Kinder Bueno Milk Cake","Desserts",6.49,"Kinder Bueno-style milk cake.","🍰"],
+["Matilda Cake","Desserts",5.99,"Chocolate cake with ganache-style topping.","🍰"],
+["Pistachio Kunafa Strawberry Cup","Desserts",8.99,"Strawberries with pistachio, kunafa and chocolate-style topping.","🍓"],
+["Biscoff Strawberry Cup","Desserts",8.99,"Strawberries with kunafa and Biscoff-style sauce.","🍓"],
+["Regular Drink Can","Drinks",1.49,"Choose from available drinks.","🥤"],
+["1.5 Litre Bottle","Drinks",2.99,"Large bottle of soft drink; selection may vary.","🥤"]
+].map((x,i)=>({id:i+1,name:x[0],cat:x[1],price:x[2],desc:x[3],emoji:x[4]}));
+
+const cats=["All","Burgers","Wraps","Chicken","Wings","Meals","Pizza","Sides","Desserts","Drinks"];
+let active="All",favs=JSON.parse(localStorage.getItem("cc-favs")||"[]"),onlyFav=false,basket={};
+const $=s=>document.querySelector(s);
+function renderCats(){$("#categories").innerHTML=cats.map(c=>`<button class="${active===c?'active':''}" onclick="setCat('${c}')">${c}</button>`).join("")}
+function render(){
+ let q=$("#search").value.trim().toLowerCase(),sort=$("#sort").value;
+ let list=raw.filter(m=>(active==="All"||m.cat===active)&&(!onlyFav||favs.includes(m.id))&&(m.name+" "+m.cat+" "+m.desc).toLowerCase().includes(q));
+ if(sort==="low")list.sort((a,b)=>a.price-b.price);
+ if(sort==="high")list.sort((a,b)=>b.price-a.price);
+ if(sort==="az")list.sort((a,b)=>a.name.localeCompare(b.name));
+ $("#resultCount").textContent=list.length+" items shown";
+ $("#grid").innerHTML=list.length?list.map(m=>`<article class="item"><div class="photo" style="background-image:url('${photos[m.cat==="Pizza"?"Pizza":m.cat==="Burgers"?"Burgers":m.cat==="Wraps"?"Wraps":m.cat==="Wings"?"Wings":m.cat==="Chicken"?"Chicken":m.cat==="Sides"?"Sides":m.cat==="Desserts"?"Desserts":m.cat==="Drinks"?"Drinks":"Meals"}')"><span class="tag">${m.cat.toUpperCase()}</span><button class="fav" onclick="toggleFav(${m.id})">${favs.includes(m.id)?"♥":"♡"}</button></div><div class="body"><div class="itemTitle"><h3>${m.name}</h3><span class="price">£${m.price.toFixed(2)}</span></div><p class="desc">${m.desc}</p><button class="add" onclick="add(${m.id})">＋ ADD TO BASKET</button></div></article>`).join(""):'<div class="empty">No items found.<br>Try another search or category.</div>';
+}
+function setCat(c){active=c;renderCats();render()}
+$("#search").addEventListener("input",render);$("#sort").addEventListener("change",render);
+function toggleFav(id){favs=favs.includes(id)?favs.filter(x=>x!==id):[...favs,id];localStorage.setItem("cc-favs",JSON.stringify(favs));render()}
+function toggleOnlyFav(){onlyFav=!onlyFav;$("#favouriteToggle").textContent=onlyFav?"← All items":"♡ Favourites";render()}
+function add(id){basket[id]=(basket[id]||0)+1;updateCart()}
+function qty(id,n){basket[id]=(basket[id]||0)+n;if(basket[id]<=0)delete basket[id];updateCart()}
+function updateCart(){
+ let entries=Object.entries(basket),count=entries.reduce((a,[,n])=>a+n,0);
+ $("#count").textContent=count;
+ $("#cartItems").innerHTML=entries.length?entries.map(([id,n])=>{let m=raw.find(x=>x.id===+id);return `<div class="line"><div><strong>${m.name}</strong><small>£${m.price.toFixed(2)} each</small></div><div class="qty"><button onclick="qty(${m.id},-1)">−</button>${n}<button onclick="qty(${m.id},1)">＋</button></div></div>`}).join(""):'<div class="empty">Your basket is empty.<br>Add something from the menu.</div>';
+ let total=entries.reduce((a,[id,n])=>a+raw.find(x=>x.id===+id).price*n,0);$("#total").textContent="£"+total.toFixed(2);
+}
+function openCart(){updateCart();$("#cartOverlay").classList.add("show")}
+function closeCart(){$("#cartOverlay").classList.remove("show")}
+function checkout(){if(!Object.keys(basket).length){alert("Your basket is empty.");return}closeCart();$("#messageOverlay").classList.add("show")}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){document.querySelectorAll(".overlay").forEach(x=>x.classList.remove("show"))}});
+renderCats();render();updateCart();
+</script>
+</body>
+</html>
